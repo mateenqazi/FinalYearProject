@@ -16,9 +16,23 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { NotificationContainer } from 'react-notifications';
 import RequestPost from '../src/components/Post'
-
+import jwt_decode from 'jwt-decode';
+import { SET_USER } from './store/actions/types'
 
 function App() {
+  if (localStorage.token) {
+    console.log('token exist')
+    const decoded = jwt_decode(localStorage.token);
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+      console.log('token remove')
+      localStorage.removeItem('token')
+    } else {
+      console.log('set user ')
+      store.dispatch({ type: SET_USER, payload: decoded })
+
+    }
+  }
   return (
     <div className="App">
       <Provider store={store}>

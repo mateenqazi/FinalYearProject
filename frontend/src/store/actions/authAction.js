@@ -3,6 +3,9 @@ import {
     SET_USER
 } from './types'
 import { NotificationManager } from 'react-notifications';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../../utils/setAuthToken'
+
 
 const backendServerURL = process.env.REACT_APP_API_URL
 const dummyURL = process.env.REACT_APP_BASE_URL
@@ -10,7 +13,11 @@ const dummyURL = process.env.REACT_APP_BASE_URL
 export const loginApi = (data, history) => dispatch => {
     axios.post(backendServerURL + '/auth/login', data)
         .then(res => {
-            dispatch({ type: SET_USER, payload: res.data })
+            localStorage.setItem('token', res.data)
+            const decoded = jwt_decode(res.data);
+            setAuthToken(res.data)
+            console.log('decoded', decoded)
+            dispatch({ type: SET_USER, payload: decoded })
             NotificationManager.success('User Login Successfully');
             history.push('/')
         })
@@ -32,6 +39,16 @@ export const SignupApi = (data, history) => dispatch => {
             NotificationManager.error(err.response.request && err.response.request.response);
         })
 }
+
+
+export const logoutUser = history => dispatch => {
+    console.log('done')
+    localStorage.removeItem('token');
+    setAuthToken(false);
+    dispatch({ type: SET_USER, payload: null })
+    if (history)
+        history.push("/");
+};
 
 
 

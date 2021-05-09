@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import { logoutUser } from '../../store/actions/authAction'
 class Header extends Component {
     constructor(props) {
         super(props)
@@ -11,13 +12,17 @@ class Header extends Component {
 
     static getDerivedStateFromProps(props, state) {
         const { isAuthenticated } = props.auth;
-
+        console.log('hello upppppppppppppppppper', isAuthenticated)
         if (isAuthenticated !== state.isAuthenticated) {
+            console.log('hello , isAuthenticated')
             state.isAuthenticated = isAuthenticated
         }
         return state
     }
-
+    logoutHanlder = (e) => {
+        e.preventDefault()
+        this.props.logoutUser(this.props.history)
+    }
 
     render() {
         const { isAuthenticated } = this.state
@@ -76,6 +81,9 @@ class Header extends Component {
                                 </Link>
                                 <a href="#" className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
                                     className="icon-menu"></span></a>
+                                {isAuthenticated ?
+                                    <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={this.logoutHanlder} className="icon-logout"></span></a>
+                                    : null}
                             </div>
                         </div>
                     </div>
@@ -89,4 +97,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(withRouter(Header))
+export default connect(mapStateToProps, { logoutUser })(withRouter(Header))

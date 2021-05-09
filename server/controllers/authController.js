@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 exports.signUp = async (req, res, next) => {
     console.log('here')
     const errors = validationResult(req);
@@ -33,74 +33,14 @@ exports.test = (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     console.log('here 2')
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //     console.log('errors', errors.errors[0].msg);
-    //     const error = new Error(errors.errors[0].msg);
-    //     error.statusCode = 401;
-    //     error.data = errors.array();
-    //     throw error;
-    // }
-
-    // //extracting data from request
     const email = req.body.email;
     const password = req.body.password;
 
-    // //declaring variable for further use
-    // let loadedUser;
-
-    // console.log('req', req.body);
-
-
-    // //we need exactly one field that why i used findOne and comparing by their email cause email will always different
-    // User.findOne({ email: email })
-    //     .then(user => {
-    //         loadedUser = user;
-    //         if (!user) {
-    //             const error = new Error('Invalid Credentials');
-    //             error.statusCode = 404;
-    //             throw error;
-    //         }
-    //         //comparing encrypted password
-    //         return bcrypt.compare(password, user.password)
-    //     })
-    //     .then(isEqual => {
-    //         console.log('isEqual: ', isEqual);
-    //         //throw invalid credentials
-    //         if (!isEqual) {
-    //             const error = new Error('Invalid Credentials');
-    //             error.statusCode = 404;
-    //             throw error;
-    //         }
-    //         let avatar = '';
-    //         //generating token
-    //         const token = jwt.sign(
-    //             {
-    //                 userId: loadedUser._id.toString(),
-    //                 type: loadedUser.userType,
-    //                 user: loadedUser.companyName,
-    //                 online: loadedUser.online,
-    //                 avatar: avatar,
-    //                 availableSlot: loadedUser.availableSlot
-    //             },
-    //             process.env.PRIVATE_KEY
-    //         );
-    //         //sending response
-    //         res.status(200).json({ token: token, userId: loadedUser._id.toString() });
-    //     })
-    //     .catch(err => {
-
-    //         //catiching password and changing its status code
-    //         if (!err.statusCode) {
-    //             err.statusCode = 500;
-    //         }
-
-    //         //then using next error handing function which is in app file
-    //         next(err);
-    //     });
+    //declaring variable for further use
+    let loadedUser;
+    console.log('CONFIRMATION_LINK_EXPIRY', process.env.CONFIRMATION_LINK_EXPIRY)
     const user = await User.findOne({ email: email })
     let error
-    console.log('user', user)
     if (!user) {
         console.log('hllo')
         error = 'Invalid Credentials';
@@ -111,7 +51,16 @@ exports.login = async (req, res, next) => {
             .compare(password, user.password)
             .then(isMatch => {
                 if (isMatch) {
-                    return res.send({ user: user, isAuth: true })
+                    const token = jwt.sign(
+                        {
+                            userId: user._id.toString(),
+                            email: user.email,
+                            user_name: user.user_name,
+                            contact_number: user.contact_number,
+                        }, process.env.JWT_SECRET_KEY,
+                        { expiresIn: '24h' },
+                    );
+                    return res.send(token)
                 }
                 else {
                     error = 'Password does not match';

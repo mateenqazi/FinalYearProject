@@ -1,7 +1,7 @@
 import { SET_USER } from '../actions/types'
 const initialState = {
     isAuthenticated: false,
-    user: {}
+    user: null
 }
 
 export default function (state = initialState, action) {
@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isAuthenticated: action.payload ? true : false,
-                user: action.payload
+                user: action.payload ? action.payload : null
             }
         default:
             return state

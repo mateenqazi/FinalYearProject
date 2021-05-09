@@ -2178,6 +2178,10 @@
 .icon-low-vision:before {
   content: "\f2a8";
 }
+
+.icon-logout:before{
+  content: "\f08b";
+}
 .icon-viadeo:before {
   content: "\f2a9";
 }

@@ -6,6 +6,8 @@ const UserModel = require('./models/User')
 const bcrypt = require('bcrypt');
 const authRoutes = require('./routes/auth')
 const postRoutes = require('./routes/post')
+const dotenv = require('dotenv');
+dotenv.config();
 mongoose.connect('mongodb://localhost:27017/medicine', {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -37,6 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
     console.log('hello')
+    res.send('hello')
 })
 app.use('/auth', authRoutes);
 app.use('/post', postRoutes);

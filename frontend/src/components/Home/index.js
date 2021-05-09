@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import Testimonials from './Testimonials'
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -48,12 +49,12 @@ class Home extends Component {
                                             <a href="#" className="h-100">
                                                 <h5>Add Post</h5>
                                                 <p>Post or Request Medicine.</p>
-                                                <Link to="/login"> <button style={{ padding: '2% 12% 2% 12%', color: '#207dff', fontSize: '22px', fontWeight: 'bold' }}>ADD Post </button></Link>
+                                                <Link to="/login"> <button style={{ padding: '2% 12% 2% 12%', color: '#207dff', fontSize: '22px', fontWeight: 'bold', border: 'none' }}>ADD Post </button></Link>
                                             </a> :
                                             <a href="#" className="h-100">
                                                 <h5>LOGIN</h5>
                                                 <p>If you have an account.</p>
-                                                <Link to="/login"> <button style={{ padding: '2% 12% 2% 12%', color: '#207dff', fontSize: '22px', fontWeight: 'bold' }}>Login </button></Link>
+                                                <Link to="/login"> <button style={{ padding: '2% 12% 2% 12%', color: '#207dff', fontSize: '22px', fontWeight: 'bold', border: 'none' }}>Login </button></Link>
                                             </a>
                                         }
                                     </div>
@@ -86,7 +87,7 @@ class Home extends Component {
                                                 <p>
                                                     Create Medicine
                                             </p>
-                                                <Link to="/sign-up"> <button style={{ padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold' }}>ADD Medicine </button></Link>
+                                                <Link to="/sign-up"> <button style={{ border: 'none', padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold' }}>ADD Medicine </button></Link>
                                             </a>
                                             :
                                             <a href="#" className="h-100">
@@ -94,7 +95,7 @@ class Home extends Component {
                                                 <p>
                                                     Create an Account!
                                             </p>
-                                                <Link to="/sign-up"> <button style={{ padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold' }}>Sign Up </button></Link>
+                                                <Link to="/sign-up"> <button style={{ border: 'none', padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold' }}>Sign Up </button></Link>
                                             </a>
                                         }
 
@@ -198,65 +199,7 @@ class Home extends Component {
                         </div>
                     </div>
 
-                    <div className="site-section">
-                        <div className="container">
-                            <div className="row">
-                                <div className="title-section text-center col-12">
-                                    <h2 className="text-uppercase">Testimonials</h2>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-12 block-3 products-wrap">
-                                    <div className="nonloop-block-3 no-direction owl-carousel">
-
-                                        <div className="testimony">
-                                            <blockquote>
-                                                <img src="images/person_1.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
-                                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat unde.&rdquo;</p>
-                                            </blockquote>
-
-                                            <p>&mdash; Kelly Holmes</p>
-                                        </div>
-
-                                        <div className="testimony">
-                                            <blockquote>
-                                                <img src="images/person_2.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
-                                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
-                                                obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
-                    unde.&rdquo;</p>
-                                            </blockquote>
-
-                                            <p>&mdash; Rebecca Morando</p>
-                                        </div>
-
-                                        <div className="testimony">
-                                            <blockquote>
-                                                <img src="images/person_3.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
-                                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
-                                                obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
-                    unde.&rdquo;</p>
-                                            </blockquote>
-
-                                            <p>&mdash; Lucas Gallone</p>
-                                        </div>
-
-                                        <div className="testimony">
-                                            <blockquote>
-                                                <img src="images/person_4.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
-                                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
-                                                obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
-                    unde.&rdquo;</p>
-                                            </blockquote>
-
-                                            <p>&mdash; Andrew Neel</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <Testimonials />
                     <div className="site-section bg-secondary bg-image" style={{ backgroundImage: `url(images/bg_2.jpg)` }}>
                         <div className="container">
                             <div className="row align-items-stretch">
