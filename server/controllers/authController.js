@@ -12,6 +12,11 @@ exports.signUp = async (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
+    const user = await User.findOne({ email: req.body.email })
+    if (user) {
+        error = 'User Already Exists.';
+        return res.status(400).json(error);
+    }
     await bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, async (err, hash) => {
             if (err)

@@ -24,6 +24,11 @@ class Header extends Component {
         this.props.logoutUser(this.props.history)
     }
 
+    onSettingPage = (e) => {
+        e.preventDefault()
+        this.props.history.push('/setting')
+    }
+
     render() {
         const { isAuthenticated } = this.state
         return (
@@ -74,16 +79,14 @@ class Header extends Component {
                                 </nav>
                             </div>
                             <div className="icons">
+
                                 <a href="#" className="icons-btn d-inline-block js-search-open"><span className="icon-search"></span></a>
-                                <Link to="/cart" className="icons-btn d-inline-block bag">
-                                    <span className="icon-shopping-bag"></span>
-                                    <span className="number">2</span>
-                                </Link>
-                                <a href="#" className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-                                    className="icon-menu"></span></a>
                                 {isAuthenticated ?
-                                    <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={this.logoutHanlder} className="icon-logout"></span></a>
-                                    : null}
+                                    <span>
+                                        <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={this.onSettingPage} className="icon-settings"></span></a>
+                                        <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={this.logoutHanlder} className="icon-logout"></span></a>
+
+                                    </span> : null}
                             </div>
                         </div>
                     </div>
