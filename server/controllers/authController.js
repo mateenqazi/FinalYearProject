@@ -3,7 +3,6 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 exports.signUp = async (req, res, next) => {
-    console.log('here')
     const errors = validationResult(req);
     console.log('errors', errors)
     if (!errors.isEmpty()) {
@@ -37,17 +36,13 @@ exports.test = (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-    console.log('here 2')
     const email = req.body.email;
     const password = req.body.password;
-
     //declaring variable for further use
     let loadedUser;
-    console.log('CONFIRMATION_LINK_EXPIRY', process.env.CONFIRMATION_LINK_EXPIRY)
     const user = await User.findOne({ email: email })
     let error
     if (!user) {
-        console.log('hllo')
         error = 'Invalid Credentials';
         return res.status(400).json(error);
     }
@@ -75,32 +70,3 @@ exports.login = async (req, res, next) => {
     }
 };
 
-
-exports.editUser = async (req, res) => {
-
-    // const { email, user_name, password, contact_number } = req.body
-    // const saltRounds = 10;
-
-    // const user = await userTable.findOne({ email: email })
-    // if (user) {
-    //     return res.send(user)
-    // }
-    // else {
-    //     bcrypt.genSalt(saltRounds, function (err, salt) {
-    //         bcrypt.hash(password, salt, function (err, hash) {
-    //         });
-    //     });
-
-    //     await bcrypt.genSalt(10, (err, salt) => {
-
-    //         bcrypt.hash(password, salt, async (err, hash) => {
-    //             if (err)
-    //                 throw err;
-    //             else {
-    //                 const user = await userTable.findOneAndUpdate({ email: email }, { user_name: user_name, password: hash, contact_number: contact_number })
-    //                 return res.send(user)
-    //             }
-    //         })
-    //     })
-    // }
-}

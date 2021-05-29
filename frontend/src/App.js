@@ -16,21 +16,19 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { NotificationContainer } from 'react-notifications';
 import RequestPost from '../src/components/Post'
+import ViewPost from '../src/components/Post/viewPost'
+import Setting from '../src/components/Setting'
 import jwt_decode from 'jwt-decode';
 import { SET_USER } from './store/actions/types'
-
+import PrivateRoute from '../src/common/PrivateRoute'
 function App() {
   if (localStorage.token) {
-    console.log('token exist')
     const decoded = jwt_decode(localStorage.token);
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
-      console.log('token remove')
       localStorage.removeItem('token')
     } else {
-      console.log('set user ')
       store.dispatch({ type: SET_USER, payload: decoded })
-
     }
   }
   return (
@@ -42,15 +40,24 @@ function App() {
             path="/"
             component={Home}
           />
+          {/* <Route exact
+            path="/"
+            component={ViewPost}
+          /> */}
           <Route
             exact
             path="/contact"
             component={Contact}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/post"
             component={RequestPost}
+          />
+          <PrivateRoute
+            exact
+            path="/setting/:id"
+            component={Setting}
           />
           <Route
             exact

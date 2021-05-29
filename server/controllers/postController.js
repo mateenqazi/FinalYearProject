@@ -1,6 +1,5 @@
 const PostUser = require('../models/Post')
 exports.createPost = async (req, res) => {
-    console.log('create post', req.user)
     if (req.body.description != null) {
         const { description } = req.body
         const post1 = await PostUser.create({ user_id: req.user.userId, description: description, last_updated: new Date() })

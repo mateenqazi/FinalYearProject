@@ -11,7 +11,6 @@ exports.verifyAccessToken = (req, res, next) => {
                 err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message
             return next(createError.Unauthorized(message))
         }
-        console.log('req.payload', payload)
         req.user = payload
         next()
     })

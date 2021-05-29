@@ -6,6 +6,8 @@ const UserModel = require('./models/User')
 const bcrypt = require('bcrypt');
 const authRoutes = require('./routes/auth')
 const postRoutes = require('./routes/post')
+const userRoutes = require('./routes/user')
+
 const dotenv = require('dotenv');
 const axios = require('axios')
 dotenv.config();
@@ -55,6 +57,7 @@ app.use(express.urlencoded({ extended: false }));
 // })
 app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
+app.use('/user', userRoutes);
 // app.use('/driver', dirverRoutes);
 // app.use('/', ordersRoutes);
 app.post('/sign-up', async (req, res) => {

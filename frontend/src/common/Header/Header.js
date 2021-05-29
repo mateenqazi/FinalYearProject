@@ -6,31 +6,36 @@ class Header extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isAuthenticated: false
+            isAuthenticated: false,
+            id: ''
         }
     }
 
     static getDerivedStateFromProps(props, state) {
-        const { isAuthenticated } = props.auth;
-        console.log('hello upppppppppppppppppper', isAuthenticated)
+        const { isAuthenticated, user } = props.auth;
         if (isAuthenticated !== state.isAuthenticated) {
-            console.log('hello , isAuthenticated')
             state.isAuthenticated = isAuthenticated
+        }
+        if (user && user.userId !== state.id) {
+            state.id = user.userId
         }
         return state
     }
     logoutHanlder = (e) => {
         e.preventDefault()
+        e.stopPropagation()
         this.props.logoutUser(this.props.history)
     }
 
-    onSettingPage = (e) => {
+    onSettingPage = (id, e) => {
         e.preventDefault()
-        this.props.history.push('/setting')
+        e.stopPropagation()
+        console.log('hello pakistan', id)
+        this.props.history.push('/setting/' + id)
     }
 
     render() {
-        const { isAuthenticated } = this.state
+        const { isAuthenticated, id } = this.state
         return (
             <div>
                 <div className="site-navbar py-2">
@@ -53,24 +58,12 @@ class Header extends Component {
                                 <nav className="site-navigation text-right text-md-center" role="navigation">
                                     <ul className="site-menu js-clone-nav d-none d-lg-block">
                                         <li className="active"><Link to="/">Home</Link></li>
-                                        {isAuthenticated ? <li><Link to="/post">Post Medicine</Link></li> : null}
                                         <li><Link to="/shop">Store</Link></li>
                                         <li className="has-children">
-                                            <a href="#">Dropdown</a>
+                                            <a href="#">Post</a>
                                             <ul className="dropdown">
-                                                <li><a href="#">Supplements</a></li>
-                                                <li className="has-children">
-                                                    <a href="#">Vitamins</a>
-                                                    <ul className="dropdown">
-                                                        <li><a href="#">Supplements</a></li>
-                                                        <li><a href="#">Vitamins</a></li>
-                                                        <li><a href="#">Diet &amp; Nutrition</a></li>
-                                                        <li><a href="#">Tea &amp; Coffee</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">Diet &amp; Nutrition</a></li>
-                                                <li><a href="#">Tea &amp; Coffee</a></li>
-
+                                                <li><a href="#">Veiw Post</a></li>
+                                                {isAuthenticated ? <li><Link to="/post">Add Post</Link></li> : null}
                                             </ul>
                                         </li>
                                         <li><Link to="/about">About</Link></li>
@@ -83,10 +76,12 @@ class Header extends Component {
                                 <a href="#" className="icons-btn d-inline-block js-search-open"><span className="icon-search"></span></a>
                                 {isAuthenticated ?
                                     <span>
-                                        <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={this.onSettingPage} className="icon-settings"></span></a>
+                                        <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={(e) => this.onSettingPage(id, e)} className="icon-settings"></span></a>
                                         <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={this.logoutHanlder} className="icon-logout"></span></a>
 
-                                    </span> : null}
+                                    </span>
+                                    : null
+                                }
                             </div>
                         </div>
                     </div>

@@ -15,6 +15,7 @@ export const createPost = (data, history) => dispatch => {
             history.push('/')
         })
         .catch(err => {
+            
             console.log('error', err.response.request.response)
             NotificationManager.error(err.response.request && err.response.request.response);
         })
