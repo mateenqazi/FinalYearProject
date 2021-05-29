@@ -47,6 +47,8 @@ function App() {
             path="/contact"
             component={Contact}
           />
+          
+          
           <Route
             exact
             path="/post"
@@ -57,6 +59,8 @@ function App() {
             path="/about"
             component={About}
           />
+          
+          
           <Route
             exact
             path="/shop"
