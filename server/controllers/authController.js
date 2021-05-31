@@ -70,3 +70,52 @@ exports.login = async (req, res, next) => {
     }
 };
 
+
+exports.updatePassword = (req, res) => {
+    const errors = validationResult(req);
+    let error = ""
+    if (!errors.isEmpty()) {
+        const error = new Error('Permission Denied.');
+        error.statusCode = 403;
+        error.data = errors.array();
+        throw error;
+    }
+    else {
+        User
+            .findById(req.body.id)
+            .then(user => {
+                bcrypt
+                    .compare(req.body.oldPassword, user.password)
+                    .then(isMatch => {
+                        if (!isMatch) {
+                            error = 'Wrong Password';
+                            return res.status(400).json(error);
+                        }
+                        else {
+                            bcrypt
+                                .compare(req.body.newPassword, user.password)
+                                .then(isMatch => {
+                                    if (isMatch) {
+                                        error = 'Password cannot be same as the previous one';
+                                        return res.status(400).json(error);
+                                    }
+                                    bcrypt
+                                        .genSalt(10, (err, salt) => {
+                                            bcrypt
+                                                .hash(
+                                                    req.body.newPassword,
+                                                    salt,
+                                                    (err, hash) => {
+                                                        if (err)
+                                                            throw err;
+                                                        user.password = hash;
+                                                        user.save().then(user => res.json(user));
+                                                    }
+                                                );
+                                        });
+                                });
+                        }
+                    })
+            });
+    }
+}

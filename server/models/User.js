@@ -16,6 +16,12 @@ const UserSchema = new Schema({
     contact_number: {
         type: String,
     },
+    bio: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
     created_at: {
         type: Date,
         default: Date.now

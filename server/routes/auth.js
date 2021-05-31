@@ -6,4 +6,5 @@ const router = express.Router();
 // require('dotenv/config');
 router.post('/login', authController.login);
 router.post('/signup', authController.signUp);
+router.put('/update_password', authController.updatePassword)
 module.exports = router;

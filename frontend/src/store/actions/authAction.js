@@ -8,7 +8,6 @@ import setAuthToken from '../../utils/setAuthToken'
 
 
 const backendServerURL = process.env.REACT_APP_API_URL
-const dummyURL = process.env.REACT_APP_BASE_URL
 
 export const loginApi = (data, history) => dispatch => {
     axios.post(backendServerURL + '/auth/login', data)
@@ -42,13 +41,24 @@ export const SignupApi = (data, history) => dispatch => {
 
 
 export const logoutUser = history => dispatch => {
-    console.log('done')
     localStorage.removeItem('token');
     setAuthToken(false);
     dispatch({ type: SET_USER, payload: null })
     if (history)
         history.push("/");
 };
+
+export const updatePassword = (data, history) => dispatch => {
+    axios.put(backendServerURL + '/auth/update_password', data)
+        .then(res => {
+            NotificationManager.success('Password Change Successfully.');
+            history.push('/')
+        })
+        .catch(err => {
+            console.log('error 1', err.response.request.response)
+            NotificationManager.error(err.response.request && err.response.request.response);
+        })
+}
 
 
 

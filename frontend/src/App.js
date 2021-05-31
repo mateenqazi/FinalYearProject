@@ -18,6 +18,7 @@ import { NotificationContainer } from 'react-notifications';
 import RequestPost from '../src/components/Post'
 import ViewPost from '../src/components/Post/viewPost'
 import Setting from '../src/components/Setting'
+import EditProfile from '../src/components/Setting/edit'
 import jwt_decode from 'jwt-decode';
 import { SET_USER } from './store/actions/types'
 import PrivateRoute from '../src/common/PrivateRoute'
@@ -58,6 +59,11 @@ function App() {
             exact
             path="/setting/:id"
             component={Setting}
+          />
+          <PrivateRoute
+            exact
+            path="/setting/edit/:id"
+            component={EditProfile}
           />
           <Route
             exact
