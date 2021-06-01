@@ -33,3 +33,16 @@ export const editUserInfo = (data, history) => dispatch => {
         })
 }
 
+export const updateProfilePicture = (data, history) => dispatch => {
+    axios.put(backendServerURL + '/user/edit_picture', data)
+        .then(res => {
+            console.log('res', res.data)
+            dispatch({ type: GET_USER_DATA, payload: res.data })
+            NotificationManager.success('Profile Picture Sucessfully Updated.');
+            history.push("/")
+        })
+        .catch(err => {
+            dispatch({ type: GET_USER_DATA, payload: null })
+            NotificationManager.error('Something getting Wrong!');
+        })
+}

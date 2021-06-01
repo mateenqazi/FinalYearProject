@@ -5,18 +5,17 @@ import { connect } from 'react-redux';
 // import { getCurrentProfile } from '../../../actions/profileActions';
 // import { images } from '../../../custom/js/images';
 import { FontAwesomeIcon } from '../../common/FontAwesome';
+import { getUserInfo, updateProfilePicture } from '../../store/actions/userAction'
+
 class FileUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             errors: {},
+            id: this.props.match.params.id,
             file: '',
             filename: 'Choose File',
-            uploadPercentage: 0,
-            uploadedFile: {},
-
-            profilePic: '',
-            getProfilePic: false,
+            picture: ''
         };
     };
 
@@ -35,10 +34,6 @@ class FileUpload extends React.Component {
         this.setFilename(files.name);
     };
 
-    getProfilePicture = () => {
-        this.setState({ getProfilePic: true });
-    }
-
     removeProfilePic = () => {
         const { user } = this.props.profile.profile;
         const { role } = this.props.auth
@@ -50,25 +45,27 @@ class FileUpload extends React.Component {
         if (this.state.file) {
             const formData = new FormData();
             formData.append('file', this.state.file);
-            //this.props.updateProfilePicture(formData, this.props.userType, this.props.history);
+            formData.append('id', this.state.id)
+            console.log(formData.get('file'))
+            this.props.updateProfilePicture(formData, this.props.history);
         }
     };
 
     static getDerivedStateFromProps(props, state) {
-        let profileData = props.profile;
-        if (profileData) {
-            let profile = profileData.profile;
-            if (profile) {
-                if (state.profilePic != profile.picture) {
-                    state.profilePic = profile.picture
-                    state.file = false;
-                    state.filename = 'Choose File'
-                }
-            }
+        const { profile } = props.user
+        if (profile && profile !== state.profile) {
+            state.profile = profile
+            state.picture = profile.picture
+            state.file = false;
+            state.filename = 'Choose File'
         }
         return state;
     }
 
+
+    componentDidMount() {
+        this.props.getUserInfo(this.props.match.params.id)
+    }
 
     render() {
 
@@ -78,9 +75,8 @@ class FileUpload extends React.Component {
         return (<React.Fragment>
             <div className="row align-items-center px-4">
                 <div className="col-lg-3 text-center mb-5">
-                    <img className="img-thumbnail" style={{ borderRadius: '50%', width: '85px', height: '85px' }} src={this.state.profilePic ? `${profilePicturesBasePath}${this.state.profilePic}` : null} alt='' />
-                    {/* &nbsp;&nbsp;<button onClick={this.getProfilePicture} className="align-middle btn btn-link float-none d-inline p-0">Update Profile Picture</button><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
-                    {this.state.profilePic && <button onClick={() => this.removeProfilePic()} className="align-middle btn btn-link float-none d-inline p-0"><FontAwesomeIcon style={{ color: 'black' }} icon="trash" /></button>}
+                    <img className="img-thumbnail" style={{ borderRadius: '50%', width: '85px', height: '85px' }} src={this.state.picture ? `${process.env.REACT_APP_API_URL}/${this.state.picture}` : `${process.env.REACT_APP_FRONTEND_URL}/images/download.png`} alt='' />
+                    {this.state.picture && <button onClick={() => this.removeProfilePic()} className="align-middle btn btn-link float-none d-inline p-0"><FontAwesomeIcon style={{ color: 'black' }} icon="trash" /></button>}
                 </div>
                 <div className="col-lg-9">
                     <form onSubmit={this.onSubmit} className=" px-4">
@@ -113,11 +109,10 @@ class FileUpload extends React.Component {
     }
 }
 const mapStateToProps = state => ({
-    profile: state.profile,
-    auth: state.auth.user,
-    page: state.page,
+    user: state.user
+
 });
 
-export default connect(mapStateToProps, {})(
+export default connect(mapStateToProps, { getUserInfo, updateProfilePicture })(
     withRouter(FileUpload)
 );

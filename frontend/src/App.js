@@ -17,6 +17,7 @@ import store from './store'
 import { NotificationContainer } from 'react-notifications';
 import RequestPost from '../src/components/Post'
 import ViewPost from '../src/components/Post/viewPost'
+import AddMedicine from '../src/components/medicine'
 import Setting from '../src/components/Setting'
 import EditProfile from '../src/components/Setting/edit'
 import jwt_decode from 'jwt-decode';
@@ -54,6 +55,11 @@ function App() {
             exact
             path="/post"
             component={RequestPost}
+          />
+          <PrivateRoute
+            exact
+            path="/add-medinice"
+            component={AddMedicine}
           />
           <PrivateRoute
             exact

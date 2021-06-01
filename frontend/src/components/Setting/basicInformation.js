@@ -27,7 +27,7 @@ class BasicInformation extends React.Component {
             state.user_name = profile.user_name
             state.contact_number = profile.contact_number
             state.email = profile.email
-            state.dob = profile.dob
+            state.dob = DateFormat(profile.dob, "yyyy-mm-dd")
             state.gender = profile.gender
             state.bio = profile.bio
         }
@@ -53,6 +53,8 @@ class BasicInformation extends React.Component {
             gender: this.state.gender,
             bio: this.state.bio
         };
+
+        console.log('basic Info', basicInfo)
         this.props.editUserInfo(
             basicInfo,
             this.props.history

@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const { validationResult } = require('express-validator');
+var path = require('path');
+
 exports.getUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -22,7 +24,8 @@ exports.editUser = async (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
-    console.log('id', req.body)
+
+    console.log(req.body)
     User.findById(req.body.id)
         .then(profile => {
 
@@ -31,6 +34,38 @@ exports.editUser = async (req, res, next) => {
             profile.dob = req.body.dob;
             profile.contact_number = req.body.contact_number;
             console.log('profile', profile)
+            profile
+                .save()
+                .then(profile1 => res.json(profile1));
+        });
+
+}
+
+
+exports.editPicture = async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        const error = new Error('Permission Denied.');
+        error.statusCode = 403;
+        error.data = errors.array();
+        throw error;
+    }
+
+    console.log(req.files)
+    const file = req.files.file
+    const newFileName = `pp-uid-${req.body.id}${path.extname(file.name)}`;
+    file.mv(
+        `./uploads/${newFileName}`,
+        err => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+        }
+    );
+    User.findById(req.body.id)
+        .then(profile => {
+            profile.picture = newFileName;
             profile
                 .save()
                 .then(profile1 => res.json(profile1));
