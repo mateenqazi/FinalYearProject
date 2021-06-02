@@ -1,57 +1,55 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { getAllPost } from '../../store/actions/postAction'
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import * as moment from 'moment'
 class ViewPost extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            posts: null
+        }
+    }
+    componentDidMount() {
+        this.props.getAllPost()
+    }
+    static getDerivedStateFromProps(props, state) {
+        const { posts } = props.post
+        if (posts && posts !== state.posts) {
+            state.posts = posts
+        }
+        return state
+    }
     render() {
+        const { posts } = this.state
+        console.log('user_id', posts)
         return (
-            <div>
-                <h2 style={{ marginTop: "10px" }}>View Post</h2>
-                <form style={{ margin: "3% 10% 0 10%" }}>
-                    <div className="p-3 p-lg-5 border">
-                        <div className="form-group row">
-                            <div className="col-md-10">
-                                <label for="name" className="text-black">
-                                    Person Name: <span className="text-danger">*</span>
-                                </label>
-                                <textarea
-                                    type="text"
-                                    className="form-control"
-                                    id="name"
-                                    name="name"
-                                    readonly
-                                    style={{ height: "100px" }}
-                                ></textarea>
-                            </div>
-                            <div className="col-md-10">
-                                <label for="post" className="text-black">
-                                    Post Details: <span className="text-danger">*</span>
-                                </label>
-                                <textarea
-                                    type="text"
-                                    className="form-control"
-                                    id="post"
-                                    name="post"
-                                    readonly
-                                    style={{ height: "100px" }}
-                                ></textarea>
-                            </div>
-                            <div className="col-md-10">
-                                <label for="date" className="text-black">
-                                    Date: <span className="text-danger">*</span>
-                                </label>
-                                <textarea
-                                    type="text"
-                                    className="form-control"
-                                    id="date"
-                                    name="date"
-                                    readonly
-                                    style={{ height: "100px" }}
-                                ></textarea>
+            <div className="container">
+                {posts && posts.map((item, key) => {
+                    return <div key={key} className="well">
+                        <div className="media">
+                            <a className="pull-left" href="#">
+                                <img style={{ height: '130px', width: '130px', borderRadius: '100%' }} className="media-object" src={item.user_id.picture ? `${process.env.REACT_APP_API_URL}/${item.user_id.picture}` : `${process.env.REACT_APP_FRONTEND_URL}/images/download.png`} />
+                            </a>
+                            <div className="media-body">
+                                <h4 className="media-heading"><Link to={`/user-profile/${item.user_id._id}`}>{item && item.user_id && item.user_id.user_name}</Link></h4>
+                                <p className="text-right">{moment(item.last_updated).format('LLLL')}</p>
+                                <p>{item.description}</p>
+                                <ul className="list-inline list-unstyled">
+                                    <li><span><i className="glyphicon glyphicon-calendar"></i> {item.user_id.contact_number} </span></li>
+                                    <li>|</li>
+                                    <span><i className="glyphicon glyphicon-comment"></i> {item.user_id.email}</span>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </form>
+                })}
+
             </div>
         );
     }
 }
-export default ViewPost;
+const mapStateToProps = state => ({
+    post: state.post
+});
+export default connect(mapStateToProps, { getAllPost })(withRouter(ViewPost));

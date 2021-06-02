@@ -47,14 +47,14 @@ class Home extends Component {
                                     <div className="banner-wrap bg-primary h-100">
                                         {isAuthenticated ?
                                             <a href="#" className="h-100">
-                                                <h5>Add Post</h5>
-                                                <p>Post or Request Medicine.</p>
-                                                <Link to="/login"> <button style={{ padding: '2% 12% 2% 12%', color: '#207dff', fontSize: '22px', fontWeight: 'bold', border: 'none' }}>ADD Post </button></Link>
+                                                <h5 style={{ color: 'white' }}>Add Post</h5>
+                                                <p style={{ color: 'white' }}>Post or Request Medicine.</p>
+                                                <Link to="/post"> <button style={{ padding: '2% 12% 2% 12%', color: 'white', fontSize: '22px', fontWeight: 'bold', border: 'none' }}>ADD Post </button></Link>
                                             </a> :
                                             <a href="#" className="h-100">
-                                                <h5>LOGIN</h5>
-                                                <p>If you have an account.</p>
-                                                <Link to="/login"> <button style={{ padding: '2% 12% 2% 12%', color: '#207dff', fontSize: '22px', fontWeight: 'bold', border: 'none' }}>Login </button></Link>
+                                                <h5 style={{ color: 'white' }}>LOGIN</h5>
+                                                <p style={{ color: 'white' }}>If you have an account.</p>
+                                                <Link to="/login"> <button style={{ padding: '2% 12% 2% 12%', color: 'white', fontSize: '22px', fontWeight: 'bold', border: 'none' }}>Login </button></Link>
                                             </a>
                                         }
                                     </div>
@@ -87,15 +87,15 @@ class Home extends Component {
                                                 <p>
                                                     Create Medicine
                                             </p>
-                                                <Link to="/sign-up"> <button style={{ border: 'none', padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold' }}>ADD Medicine </button></Link>
+                                                <Link to="/add-medinice"> <button style={{ border: 'none', padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold', color: 'white' }}>ADD Medicine </button></Link>
                                             </a>
                                             :
                                             <a href="#" className="h-100">
                                                 <h5>SIGN UP</h5>
                                                 <p>
                                                     Create an Account!
-                                            </p>
-                                                <Link to="/sign-up"> <button style={{ border: 'none', padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold' }}>Sign Up </button></Link>
+                                                </p>
+                                                <Link to="/sign-up"> <button style={{ border: 'none', padding: '2% 12% 2% 12%', fontSize: '22px', fontWeight: 'bold', color: 'white' }}>Sign Up </button></Link>
                                             </a>
                                         }
 

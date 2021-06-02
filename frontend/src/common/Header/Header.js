@@ -30,7 +30,7 @@ class Header extends Component {
     onSettingPage = (id, e) => {
         e.preventDefault()
         e.stopPropagation()
-        console.log('hello pakistan', id)
+
         this.props.history.push('/setting/' + id)
     }
 
@@ -62,7 +62,7 @@ class Header extends Component {
                                         <li className="has-children">
                                             <a href="#">Post</a>
                                             <ul className="dropdown">
-                                                <li><a href="#">Veiw Post</a></li>
+                                                <li><Link to="/view-post">Veiw Post</Link></li>
                                                 {isAuthenticated ? <li><Link to="/post">Add Post</Link></li> : null}
                                             </ul>
                                         </li>

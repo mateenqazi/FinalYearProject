@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const medicineSchema = new Schema({
     user_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true
     },
     price: {
@@ -32,7 +32,19 @@ const medicineSchema = new Schema({
     },
     expire_date: {
         type: Date,
-        required: true
+        //required: true
+    },
+    image: {
+        type: String
+    },
+    side_effects: {
+        type: String
+    },
+    uses: {
+        type: String
+    },
+    price: {
+        type: String
     }
 });
 

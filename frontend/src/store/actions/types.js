@@ -1,2 +1,5 @@
 export const SET_USER = "SET_USER"
 export const GET_USER_DATA = "GET_USER_DATA"
+export const GET_ALL_POST = "GET_ALL_POST"
+export const GET_ALL_MEDICINE = "GET_ALL_MEDICINE"
+export const GET_SINGLE_MEDICINE = "GET_SINGLE_MEDICINE"

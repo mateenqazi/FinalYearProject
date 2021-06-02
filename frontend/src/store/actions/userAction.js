@@ -46,3 +46,31 @@ export const updateProfilePicture = (data, history) => dispatch => {
             NotificationManager.error('Something getting Wrong!');
         })
 }
+
+export const submitStar = (data) => dispatch => {
+    axios.put(backendServerURL + '/user/submit_star', data)
+        .then(res => {
+            console.log('res', res.data)
+            dispatch({ type: GET_USER_DATA, payload: res.data })
+            NotificationManager.success('Rating Submitted.');
+        })
+        .catch(err => {
+            dispatch({ type: GET_USER_DATA, payload: null })
+            NotificationManager.error('Something getting Wrong!');
+        })
+}
+
+
+export const reportUser = (data) => dispatch => {
+    axios.put(backendServerURL + '/user/report_user', data)
+        .then(res => {
+
+            dispatch({ type: GET_USER_DATA, payload: res.data })
+            NotificationManager.success('User Reported.');
+        })
+        .catch(err => {
+            dispatch({ type: GET_USER_DATA, payload: null })
+            NotificationManager.error('Something getting Wrong!');
+        })
+}
+

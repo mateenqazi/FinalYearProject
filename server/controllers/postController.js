@@ -30,3 +30,9 @@ exports.delete_post = async (req, res) => {
         res.send("deletion successfull")
     }
 }
+
+exports.getAllPost = async (req, res, next) => {
+    const post = await PostUser.find().sort({ 'last_updated': '-1' }).populate("user_id")
+    console.log('heeheheh', post)
+    return res.send(post)
+}

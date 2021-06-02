@@ -20,6 +20,7 @@ import ViewPost from '../src/components/Post/viewPost'
 import AddMedicine from '../src/components/medicine'
 import Setting from '../src/components/Setting'
 import EditProfile from '../src/components/Setting/edit'
+import UserProfile from '../src/components/Setting/userProfile'
 import jwt_decode from 'jwt-decode';
 import { SET_USER } from './store/actions/types'
 import PrivateRoute from '../src/common/PrivateRoute'
@@ -42,14 +43,19 @@ function App() {
             path="/"
             component={Home}
           />
-          {/* <Route exact
-            path="/"
+          <Route exact
+            path="/view-post"
             component={ViewPost}
-          /> */}
+          />
           <Route
             exact
             path="/contact"
             component={Contact}
+          />
+          <Route
+            exact
+            path="/user-profile/:id"
+            component={UserProfile}
           />
           <PrivateRoute
             exact
@@ -81,13 +87,6 @@ function App() {
             path="/shop"
             component={Shop}
           />
-          <Route exact path="/cart" component={Cart}
-          />
-          <Route
-            exact
-            path="/checkout"
-            component={Checkout}
-          />
           <Route
             exact
             path="/thankyou"
@@ -95,7 +94,7 @@ function App() {
           />
           <Route
             exact
-            path="/item"
+            path="/item/:id"
             component={ShopSingle}
           />
           <Route

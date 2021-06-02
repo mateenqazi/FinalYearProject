@@ -72,3 +72,28 @@ exports.editPicture = async (req, res, next) => {
         });
 
 }
+
+exports.submitStar = async (req, res, next) => {
+    console.log('hehe', req.body)
+    const user = await User.findById(req.body.id)
+    let count = user.rating_record.length
+    if (count >= 1) {
+        user.rating = (parseInt(req.body.star) + (user.rating * count)) / (count + 1)
+        user.rating_record.push(req.body.user_id)
+    }
+    else {
+        user.rating = parseInt(req.body.star)
+        user.rating_record.push(req.body.user_id)
+    }
+    user.save()
+        .then(result => { res.send(result) })
+}
+
+exports.reportUser = async (req, res, next) => {
+    console.log('hehe', req.body)
+    const user = await User.findById(req.body.id)
+    user.report = user.report + 1
+    user.report_record.push(req.body.user_id)
+    user.save()
+        .then(result => { res.send(result) })
+}

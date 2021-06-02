@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { NotificationManager } from 'react-notifications';
-
+import {
+    GET_ALL_POST
+} from './types';
 
 const backendServerURL = process.env.REACT_APP_API_URL
 
@@ -17,14 +19,13 @@ export const createPost = (data, history) => dispatch => {
         })
 }
 
-export const SignupApi = (data, history) => dispatch => {
-    console.log(data)
-    axios.post(backendServerURL + '/auth/signup', data)
+export const getAllPost = () => dispatch => {
+    axios.get(backendServerURL + '/post/all')
         .then(res => {
-            NotificationManager.success('User Signup Successfully');
-            history.push('/')
+            dispatch({ type: GET_ALL_POST, payload: res.data })
         })
         .catch(err => {
+            dispatch({ type: GET_ALL_POST, payload: null })
             console.log('error', err.response.request.response)
             NotificationManager.error(err.response.request && err.response.request.response);
         })
