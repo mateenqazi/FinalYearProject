@@ -72,8 +72,6 @@ class Header extends Component {
                                 </nav>
                             </div>
                             <div className="icons">
-
-                                <a href="#" className="icons-btn d-inline-block js-search-open"><span className="icon-search"></span></a>
                                 {isAuthenticated ?
                                     <span>
                                         <a href="#" className="icons-btn d-inline-block js-search-open"><span onClick={(e) => this.onSettingPage(id, e)} className="icon-settings"></span></a>

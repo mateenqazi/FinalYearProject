@@ -26,17 +26,21 @@ exports.scrapeMedicine = async (id, name, category, type) => {
     let result = await Medicine.findById(id)
     console.log('result', result)
     console.log(__dirname)
-    const childPython = await spawn('python3', [__dirname+'/scraping.py', name, category, type]);
-    
+    const childPython = await spawn('python', [__dirname + '/scraping.py', name, category, type]);
+
     let price, side_effects, uses, image;
-    
+
     childPython.stdout.on('data', async (data) => {
-        
+
         info = data.toString()
         price = info.split('\n')[0]
         side_effects = info.split('\n')[1]
         uses = info.split('\n')[2]
         image_link = info.split('\n')[3]
+        console.log(price)
+        console.log(side_effects)
+        console.log(uses)
+        console.log(image_link)
         price = price
         side_effects = side_effects
         uses = uses
@@ -46,7 +50,7 @@ exports.scrapeMedicine = async (id, name, category, type) => {
             console.log("-------------------")
             result.price = price
         }
-        
+
         result.side_effects = side_effects
         result.uses = uses
         result.image = image_link

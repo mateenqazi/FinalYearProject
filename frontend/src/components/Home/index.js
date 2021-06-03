@@ -160,75 +160,39 @@ class Home extends Component {
                     </div>
  */}
 
-                    {/* <div className="site-section bg-light">
-                        <div className="container">
-                            <div className="row">
-                                <div className="title-section text-center col-12">
-                                    <h2 className="text-uppercase">New Products</h2>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-12 block-3 products-wrap">
-                                    <div className="nonloop-block-3 owl-carousel">
-                                        <div className="text-center item mb-4">
-                                            <a href="shop-single.html"> <img src="images/product_03.png" alt="Image" /></a>
-                                            <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                                            <p className="price">$120.00</p>
-                                        </div>
+                        <div className="site-section bg-light">
 
-                                        <div className="text-center item mb-4">
-                                            <a href="shop-single.html"> <img src="images/product_01.png" alt="Image" /></a>
-                                            <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                                            <p className="price">$120.00</p>
-                                        </div>
+                        </div>
 
-                                        <div className="text-center item mb-4">
-                                            <a href="shop-single.html"> <img src="images/product_02.png" alt="Image" /></a>
-                                            <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                                            <p className="price">$120.00</p>
-                                        </div>
+                        <Testimonials />
+                        <div className="site-section bg-secondary bg-image" style={{ backgroundImage: `url(images/bg_2.jpg)` }}>
+                            <div className="container">
+                                <div className="row align-items-stretch">
+                                    <div className="col-lg-6 mb-5 mb-lg-0">
+                                        <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: `url(images/bg_1.jpg)` }}>
 
-                                        <div className="text-center item mb-4">
-                                            <a href="shop-single.html"> <img src="images/product_04.png" alt="Image" /></a>
-                                            <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                                            <p className="price">$120.00</p>
-                                        </div>
-
+                                            <div className="banner-1-inner align-self-center">
+                                                <h2>Pharma Products</h2>
+                                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div className="col-lg-6 mb-5 mb-lg-0">
+                                        <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: `url(images/bg_2.jpg)` }}>
+                                            <div className="banner-1-inner ml-auto  align-self-center">
+                                                <h2>Rated by Experts</h2>
+                                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                </p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <Testimonials />
-                    <div className="site-section bg-secondary bg-image" style={{ backgroundImage: `url(images/bg_2.jpg)` }}>
-                        <div className="container">
-                            <div className="row align-items-stretch">
-                                <div className="col-lg-6 mb-5 mb-lg-0">
-                                    <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: `url(images/bg_1.jpg)` }}>
-
-                                        <div className="banner-1-inner align-self-center">
-                                            <h2>Pharma Products</h2>
-                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
-                </p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div className="col-lg-6 mb-5 mb-lg-0">
-                                    <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: `url(images/bg_2.jpg)` }}>
-                                        <div className="banner-1-inner ml-auto  align-self-center">
-                                            <h2>Rated by Experts</h2>
-                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
-                </p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+                </div>
             </div>
-            </div></div>
         )
     }
 }
