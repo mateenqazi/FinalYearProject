@@ -3,6 +3,8 @@ const { validationResult } = require('express-validator');
 var path = require('path');
 const { spawn } = require('child_process');
 const { stdout } = require('process');
+const { SSL_OP_EPHEMERAL_RSA } = require('constants');
+const { resolve } = require('path');
 exports.postMedicine = async (req, res, next) => {
     console.log(req.body)
     const errors = validationResult(req);
@@ -12,18 +14,24 @@ exports.postMedicine = async (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
+
     const medicine = await Medicine.create({ user_id: req.body.id, name: req.body.name, price: req.body.price, expire_date: req.body.expire_date, quantity: req.body.qty, type: req.body.type, category: req.body.category })
-    this.scapMedicine(medicine._id, medicine.name)
+    await this.scrapeMedicine(medicine._id, medicine.name, medicine.category, medicine.type)
+
     return res.send(medicine)
 };
 
-exports.scapMedicine = async (id, name) => {
+exports.scrapeMedicine = async (id, name, category, type) => {
 
     let result = await Medicine.findById(id)
     console.log('result', result)
-    const childPython = await spawn('python', [__dirname + '\\scraping.py', name, "equiqment"]);
+    console.log(__dirname)
+    const childPython = await spawn('python3', [__dirname+'/scraping.py', name, category, type]);
+    
     let price, side_effects, uses, image;
-    childPython.stdout.on('data', (data) => {
+    
+    childPython.stdout.on('data', async (data) => {
+        
         info = data.toString()
         price = info.split('\n')[0]
         side_effects = info.split('\n')[1]
@@ -34,17 +42,17 @@ exports.scapMedicine = async (id, name) => {
         uses = uses
         image = image_link
 
-        if (result.type !== "free") {
+        if (result.type !== "free" && parseFloat(result.price) > parseFloat(price)) {
+            console.log("-------------------")
             result.price = price
         }
+        
         result.side_effects = side_effects
         result.uses = uses
         result.image = image_link
-        result.save()
-        console.log(`Price: ${price}`);
-        console.log(`Side Effects: ${side_effects}`);
-        console.log(`Uses: ${uses}`);
-        console.log(`Image Link: ${image_link}`);
+        await result.save()
+
+        // console.log("saved1")
     });
 
     childPython.stderr.on('data', (data) => {
