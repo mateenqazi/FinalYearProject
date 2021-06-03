@@ -11,8 +11,7 @@ class Footer extends Component {
 
                                 <div className="block-7">
                                     <h3 className="footer-heading mb-4">About Us</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
-            sed dolorum excepturi iure eaque, aut unde.</p>
+                                    <p>Medicine Donation Platform</p>
                                 </div>
 
                             </div>
@@ -30,8 +29,8 @@ class Footer extends Component {
                                 <div className="block-5 mb-5">
                                     <h3 className="footer-heading mb-4">Contact Info</h3>
                                     <ul className="list-unstyled">
-                                        <li className="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-                                        <li className="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+                                        <li className="phone">0300-1234567</li>
+                                        {/* <li className="phone"><a href="tel://23923929210">+2 392 3929 210</a></li> */}
                                         <li className="email">emailaddress@domain.com</li>
                                     </ul>
                                 </div>
@@ -40,14 +39,7 @@ class Footer extends Component {
                             </div>
                         </div>
                         <div className="row pt-5 mt-5 text-center">
-                            <div className="col-md-12">
-                                <p>
-                                    Copyright &copy;
-          <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
-          with <i className="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
-                                        className="text-primary">Colorlib</a>
-                                </p>
-                            </div>
+
 
                         </div>
                     </div>

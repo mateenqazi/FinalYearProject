@@ -66,8 +66,8 @@ class Header extends Component {
                                                 {isAuthenticated ? <li><Link to="/post">Add Post</Link></li> : null}
                                             </ul>
                                         </li>
-                                        <li><Link to="/about">About</Link></li>
-                                        <li><Link to="/contact">Contact</Link></li>
+                                        {/* <li><Link to="/about">About</Link></li>
+                                        <li><Link to="/contact">Contact</Link></li> */}
                                     </ul>
                                 </nav>
                             </div>

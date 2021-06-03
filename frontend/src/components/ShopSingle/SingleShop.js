@@ -45,10 +45,10 @@ class SingleShop extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <h2 className="text-black">{singleMedicine && singleMedicine.name}</h2>
-                                    <p><strong>Side Effects: </strong>{singleMedicine && singleMedicine.side_effects}</p>
 
+<br></br><br></br>
 
-                                    <p><strong className="text-primary h4">{singleMedicine && singleMedicine.price}</strong></p>
+                                    <p><strong className="text-primary h4">Rs. {singleMedicine && singleMedicine.price}</strong></p>
 
 
 
@@ -59,11 +59,13 @@ class SingleShop extends Component {
                                         </div>
 
                                     </div>
+                                    <br></br><br></br>
+                                    <p><strong>Side Effects: </strong>{singleMedicine && singleMedicine.side_effects}</p>
                                     <p><strong>Uses: </strong> <mark>{singleMedicine && singleMedicine.uses}</mark></p>
                                     <p><strong>Category: </strong> <mark>{singleMedicine && singleMedicine.category}</mark></p>
 
 
-
+<br></br><br></br>
 
                                 </div>
                             </div>

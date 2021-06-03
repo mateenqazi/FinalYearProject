@@ -30,9 +30,10 @@ class Home extends Component {
                                 <div className="col-lg-7 mx-auto order-lg-2 align-self-center">
                                     <div className="site-block-cover-content text-center">
                                         <h2 className="sub-title">Effective Medicine, New Medicine Everyday</h2>
-                                        <h1>Welcome To Pharma</h1>
+                                        <h1>Welcome To Medicine Donation System</h1>
                                         <p>
-                                            <a href="#" className="btn btn-primary px-5 py-3">Shop Now</a>
+                                            <Link to="/shop" className="btn btn-primary px-5 py-3">Shop Now</Link>
+                                            {/* <a href="#" >Shop Now</a> */}
                                         </p>
                                     </div>
                                 </div>
@@ -107,7 +108,7 @@ class Home extends Component {
                     </div>
 
                     <div className="site-section">
-                        <div className="container">
+                        {/* <div className="container">
                             <div className="row">
                                 <div className="title-section text-center col-12">
                                     <h2 className="text-uppercase">Popular Products</h2>
@@ -157,9 +158,9 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
+ */}
 
-
-                    <div className="site-section bg-light">
+                    {/* <div className="site-section bg-light">
                         <div className="container">
                             <div className="row">
                                 <div className="title-section text-center col-12">
@@ -225,8 +226,9 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
+            </div></div>
         )
     }
 }
